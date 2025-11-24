@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,18 +23,6 @@ import lombok.Setter;
 @Table(name = "TRACKS")
 public class Track {
     
-    /*    
-    TRACK_ID      INTEGER        NOT NULL DEFAULT NEXT VALUE FOR SEQ_TRACK_ID,
-    NAME          VARCHAR(200)   NOT NULL,
-    ALBUM_ID      INTEGER,
-    MEDIA_TYPE_ID INTEGER        NOT NULL,
-    GENRE_ID      INTEGER,
-    COMPOSER      VARCHAR(220),
-    MILLISECONDS  INTEGER        NOT NULL,
-    BYTES         INTEGER,
-    UNIT_PRICE    NUMERIC(10, 2) NOT NULL,
-    */ 
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "track_seq")
     @SequenceGenerator(name = "track_seq", sequenceName = "SEQ_TRACK_ID", allocationSize = 1)
@@ -47,11 +36,13 @@ public class Track {
     @JoinColumn(name = "ALBUM_ID")
     private Album album;  
 
-    @Column(name = "MEDIA_TYPE_ID", nullable = false)
-    private Integer mediaTypeId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "MEDIA_TYPE_ID", nullable = false)
+    private MediaType mediaTypeId;
 
-    @Column(name = "GENRE_ID")
-    private Integer genreId;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "GENRE_ID")
+    private Genre genreId;
 
     @Column(name = "COMPOSER")
     private String composer;
