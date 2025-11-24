@@ -3,6 +3,8 @@ package utnfrc.isi.back.infra;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class LocalEntityManagerProvider {
     
@@ -11,19 +13,27 @@ public final class LocalEntityManagerProvider {
     private static final EntityManagerFactory EMF;
 
     static {
-        // recrea el esquema explícitamente desde el ddl.sql (como en los ejemplos JDBC/JPA)
+        // Configurar el EntityManagerFactory para usar el DataSource
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("jakarta.persistence.jdbc.datasource", DataSourceProvider.getDataSource());
+
+        // Recrear el esquema desde el DDL
         DbInitializer.recreateSchemaFromDdl();
-        EMF = Persistence.createEntityManagerFactory(PU);
+
+        // Crear el EntityManagerFactory con las propiedades personalizadas
+        EMF = Persistence.createEntityManagerFactory(PU, properties);
     }
 
-    private LocalEntityManagerProvider(){}
+    private LocalEntityManagerProvider() {}
 
     public static EntityManager em() {
         return EMF.createEntityManager();
     }
 
     public static void close() {
-        EMF.close();
+        if (EMF != null && EMF.isOpen()) {
+            EMF.close();
+        }
     }
 
 }
