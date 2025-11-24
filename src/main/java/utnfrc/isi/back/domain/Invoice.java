@@ -65,4 +65,9 @@ public class Invoice {
 
     @Column(name = "TOTAL")
     private Float total;
+
+    // Método que valida el total que sea mayor a 0 (cero)
+    public boolean hasValidTotal() {
+        return total > 0;
+    }
 }

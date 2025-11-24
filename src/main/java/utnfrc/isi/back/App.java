@@ -1,13 +1,10 @@
 package utnfrc.isi.back;
 
 import utnfrc.isi.back.domain.Artist;
-import utnfrc.isi.back.domain.Album;
-import utnfrc.isi.back.domain.Track;
-import utnfrc.isi.back.infra.DbInitializer;
 import utnfrc.isi.back.infra.LocalEntityManagerProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
  * Proyecto para el parcial de BackEnd de Aplicaciones
@@ -17,26 +14,89 @@ import java.time.LocalDate;
  */
 public class App {
 
+    private static EntityManager em;
+
+    private App() {
+        App.em = LocalEntityManagerProvider.em();
+    }
+
     /**
      * Metodo principal de la aplicacion
      * @param args
      */
-    public static void main(String[] args) {               
+    public static void main(String[] args) {
 
+        Scanner entrada = new Scanner(System.in);
+
+        new App();
+
+        int opcion = 0;
+        boolean control = false;
+
+        do {
+            System.out.println("\n*****************MENU DE OPCIONES*****************");
+            System.out.println("1) Cargar la base de datos en memoria");
+            System.out.println("2) Verificar la base de datos en el navegador");
+            System.out.println("3) Verificar cantidad de registros en Artists");
+            System.out.println("4) Verificar cantidad de registros en Genres");
+            System.out.println("5) Cargar datos de pruebas de Artists");
+            System.out.println("6) Cargar datos de pruebas de Album");
+            System.out.println("7) Cargar datos de pruebas de Track");
+            System.out.println("9) Salir del sistema");
+            System.out.print("Ingrese la opción: ");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    if(!control) {
+                        new App();
+                        System.out.println("[OK] H2 + DDL inicializados y mapeos JPA verificados.");
+                        control = true;
+                    }                    
+                    break;
+                case 2: 
+                    if(control) 
+                        mostrarBD();
+                    else 
+                        System.out.println("Se debe crear primero, poner opción 1");
+                    break; 
+                case 3:
+                    if(control) 
+                        System.out.println("HOla");
+                    else 
+                        System.out.println("Se debe crear primero, poner opción 1");
+                    break;
+                default: 
+                    System.out.println("Opcion incorrecta! \n\n");
+                    break;
+
+                case 9:
+                    LocalEntityManagerProvider.close();
+                    System.out.println("Hasta luego");
+                    return;                              
+                
+            }
+            
+        } while(opcion != 9);
+
+    }
+
+    private static void mostrarBD() {
         try {
-            // 1. Inicializar la base de datos y verificar
-            System.out.println("[INFO] Inicializando base de datos H2...");
-            DbInitializer.recreateSchemaFromDdl();
-            System.out.println("[OK] Base de datos H2 inicializada correctamente.");
+            org.h2.tools.Server.createWebServer("-webPort", "8082", "-webAllowOthers").start();
+            System.out.println("Consola de H2 disponible en: http://localhost:8082");
+        } catch (Exception e) {
+            System.err.println("No se pudo iniciar el servidor web de H2: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
-            // 2. Construir un EntityManager
+
+    /*
+    try {
             EntityManager em = LocalEntityManagerProvider.em();
-            System.out.println("[OK] EntityManager creado correctamente.");
+            
 
-            // 3. Smoke test: Insertar y leer datos de prueba
-            System.out.println("[INFO] Ejecutando smoke test...");
-
-            // Crear y persistir un Artist
             Artist artist = new Artist();
             artist.setName("Pink Floyd");
             em.getTransaction().begin();
@@ -44,49 +104,18 @@ public class App {
             em.getTransaction().commit();
             System.out.println("[OK] Artista 'Pink Floyd' guardado correctamente.");
 
-            // Crear y persistir un Album
-            Album album = new Album();
-            album.setTitle("The Dark Side of the Moon");
-            album.setIdArtist(artist); // Relación con el artista
-            em.getTransaction().begin();
-            em.persist(album);
-            em.getTransaction().commit();
-            System.out.println("[OK] Álbum 'The Dark Side of the Moon' guardado correctamente.");
-
-            // Crear y persistir un Track
-            Track track = new Track();
-            track.setName("Time");
-            track.setAlbum(album); // Relación con el álbum
-            track.setMilliseconds(421);
-            track.setUnitPrice(1.99f);
-            em.getTransaction().begin();
-            em.persist(track);
-            em.getTransaction().commit();
-            System.out.println("[OK] Track 'Time' guardado correctamente.");
-
-            // Contar registros en ARTISTS
             Query countArtistsQuery = em.createQuery("SELECT COUNT(a) FROM Artist a");
             Long artistCount = (Long) countArtistsQuery.getSingleResult();
             System.out.printf("[OK] Hay %d artistas en la base de datos.%n", artistCount);
 
-            // Contar registros en ALBUMS
-            Query countAlbumsQuery = em.createQuery("SELECT COUNT(a) FROM Album a");
-            Long albumCount = (Long) countAlbumsQuery.getSingleResult();
-            System.out.printf("[OK] Hay %d álbumes en la base de datos.%n", albumCount);
-
-            // Contar registros en TRACKS
-            Query countTracksQuery = em.createQuery("SELECT COUNT(t) FROM Track t");
-            Long trackCount = (Long) countTracksQuery.getSingleResult();
-            System.out.printf("[OK] Hay %d tracks en la base de datos.%n", trackCount);
-
-            // 4. Mensaje final
-            System.out.println("[OK] H2 + DDL inicializados y mapeos JPA verificados.");
+            
 
         } catch (Exception e) {
             System.err.println("[ERROR] Fallo en el smoke test: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "[ERROR] Fallo en el smoke test: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } finally {
-            LocalEntityManagerProvider.close(); // Cerrar el EntityManagerFactory
-        }     
-    }
+            LocalEntityManagerProvider.close(); 
+        }
+             */
 }

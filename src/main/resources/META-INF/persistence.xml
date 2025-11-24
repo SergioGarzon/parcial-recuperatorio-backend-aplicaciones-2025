@@ -26,7 +26,7 @@
         <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
         <!-- DDL: para práctica inicial -->
-        <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        <property name="hibernate.hbm2ddl.auto" value="none"/> <!--Aqui cambio create-drop a none como lo solicita el enunciado -->
 
       <!-- Generación de esquema vía script (tu ddl.sql) -->
       <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
