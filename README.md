@@ -4,9 +4,9 @@
 
 <img src="./assets/Images/logo_utn_frc.png" alt="Imagen UTN FRC" />
 
-* Carrera: Ingenieria en Sistemas de Información
-* Materia: BackEnd de Aplicaciones
-* Alumno: Garzón Sergio Gabriel
+* __Carrera:__ Ingenieria en Sistemas de Información
+* __Materia:__ BackEnd de Aplicaciones
+* __Alumno:__ Garzón Sergio Gabriel
 
 ## Repositorio de GitHub
 
@@ -18,8 +18,22 @@
 
 ## Tecnologias:
 
-* Java
-* Maven
+* Java (Versión: 20.0.2)
+
+  Para ver la versión de Java, ejecutar el comando:
+
+  ~~~JAVA
+  java --version
+  ~~~
+
+* Apache Maven (Versión: 3.9.11)
+
+  Para ver la versión de Maven, ejecutar el comando:
+
+  ~~~MAVEN
+  mvn --version
+  ~~~
+
 * Motor de base de datos embebido H2
 
 ## Pasos para la ejecución del proyecto

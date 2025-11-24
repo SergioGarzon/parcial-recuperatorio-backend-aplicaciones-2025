@@ -13,3 +13,7 @@ C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Ga
 C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\infra\DataSourceProvider.java
 C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\infra\DbInitializer.java
 C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\infra\LocalEntityManagerProvider.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\repo\AlbumRepository.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\repo\ArtistRepository.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\repo\InvoiceRepository.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\repo\TrackRepository.java
