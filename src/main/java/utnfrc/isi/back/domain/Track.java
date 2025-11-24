@@ -20,4 +20,14 @@ public class Track {
     private int idTrackPlaylist;
     private int idPlaylist;
     private int idTrack;
+
+    /* 
+    public double getDurationInMinutes() {
+        return milliseconds != null ? milliseconds / 60000.0 : 0.0;
+    }
+
+    public boolean hasValidPrice() {
+        return unitPrice != null && unitPrice.doubleValue() > 0.0;
+    }
+    */
 }
