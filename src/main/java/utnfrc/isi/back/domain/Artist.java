@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "ARTISTS")
 public class Artist {
     
     // ARTIST_ID, NAME
@@ -23,5 +25,6 @@ public class Artist {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="artist_seq")
     @SequenceGenerator(name = "artist_seq", sequenceName = "SEQ_ARTIST_ID", allocationSize = 1)    
     private Integer idArtist;
+
     private String name;
 }

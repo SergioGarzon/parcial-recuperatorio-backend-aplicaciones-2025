@@ -1,6 +1,7 @@
 package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.Getter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "CUSTOMERS")
 public class Customer {
     
     /*
