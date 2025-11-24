@@ -1,0 +1,15 @@
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\App.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Album.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Artist.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Customer.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Employee.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Genre.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Invoice.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\InvoiceItem.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\MediaType.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Playlist.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\PlaylistTrack.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\domain\Track.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\infra\DataSourceProvider.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\infra\DbInitializer.java
+C:\Users\asus tuf\Desktop\Proyectos de BackEnd 2025\recuperatorio-parcial-3k1-Garzon-Sergio-54330\src\main\java\utnfrc\isi\back\infra\LocalEntityManagerProvider.java

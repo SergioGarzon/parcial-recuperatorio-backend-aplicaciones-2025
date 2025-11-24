@@ -1,7 +1,10 @@
 package utnfrc.isi.back;
 
 /**
- * Hello world!
+ * Proyecto para el parcial de BackEnd de Aplicaciones
+ * 
+ * @author Sergio Garzón - Legajo 54330
+ * @version 1.0
  */
 public class App {
     public static void main(String[] args) {
