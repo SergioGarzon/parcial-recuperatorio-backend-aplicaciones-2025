@@ -1,5 +1,7 @@
 package utnfrc.isi.back.domain;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -36,7 +38,7 @@ public class Invoice {
     private Integer idCustomer;
 
     @Column(name = "INVOICE_DATE")
-    private String invoiceDate;
+    private LocalDate invoiceDate;
 
     @Column(name = "BILLING_ADDRESS")
     private String billingAddress;

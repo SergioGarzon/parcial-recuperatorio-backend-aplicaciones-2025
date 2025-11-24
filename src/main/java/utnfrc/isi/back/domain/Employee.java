@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -51,10 +52,10 @@ public class Employee {
     private Integer reportsTo;
 
     @Column(name = "BIRTH_DATE")
-    private String birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "HIRE_DATE")
-    private String hireDate;
+    private LocalDate hireDate;
 
     @Column(name = "ADDRESS")
     private String address;
