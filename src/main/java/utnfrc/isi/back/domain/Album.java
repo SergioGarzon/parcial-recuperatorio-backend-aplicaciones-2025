@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -33,6 +34,6 @@ public class Album {
     private String title;
 
     @ManyToOne(optional = false)
-    @Column(name = "ARTIST_ID", nullable = false)
-    private Integer idArtist;
+    @JoinColumn(name = "ARTIST_ID", nullable = false)
+    private Artist idArtist;
 }

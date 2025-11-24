@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -41,8 +42,8 @@ public class Invoice {
     private Integer idInvoice;
 
     @ManyToOne(optional = false)
-    @Column(name = "CUSTOMER_ID")
-    private Integer idCustomer;
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Customer idCustomer;
 
     @Column(name = "INVOICE_DATE")
     private LocalDate invoiceDate;

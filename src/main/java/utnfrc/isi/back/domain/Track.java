@@ -26,19 +26,38 @@ public class Track {
     TRACK_ID          INTEGER NOT NULL,
      */
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="trackplaylist_seq")
-    @SequenceGenerator(name = "trackplaylist_seq", sequenceName = "SEQ_PLAYLIST_TRACK_ID", allocationSize = 1)
-    @Column(name = "PLAYLIST_TRACK_ID")
-    private Integer idTrackPlaylist;
-
-    @Column(name = "PLAYLIST_ID")
-    private Integer idPlaylist;
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "track_seq")
+    @SequenceGenerator(name = "track_seq", sequenceName = "SEQ_TRACK_ID", allocationSize = 1)
     @Column(name = "TRACK_ID")
     private Integer idTrack;
 
-    /* 
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "ALBUM_ID")
+    private Integer albumId;
+
+    @Column(name = "MEDIA_TYPE_ID")
+    private Integer mediaTypeId;
+
+    @Column(name = "GENRE_ID")
+    private Integer genreId;
+
+    @Column(name = "COMPOSER")
+    private String composer;
+
+    @Column(name = "MILLISECONDS")
+    private Integer milliseconds;
+
+    @Column(name = "BYTES")
+    private Integer bytes;
+
+    @Column(name = "UNIT_PRICE")
+    private Float unitPrice;
+  
+    
     public double getDurationInMinutes() {
         return milliseconds != null ? milliseconds / 60000.0 : 0.0;
     }
@@ -46,5 +65,5 @@ public class Track {
     public boolean hasValidPrice() {
         return unitPrice != null && unitPrice.doubleValue() > 0.0;
     }
-    */
+    
 }

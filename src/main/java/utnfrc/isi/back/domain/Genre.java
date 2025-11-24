@@ -26,8 +26,8 @@ public class Genre {
      */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="employee_seq")
-    @SequenceGenerator(name = "employee_seq", sequenceName = "SEQ_EMPLOYEE_ID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genre_seq")
+    @SequenceGenerator(name = "genre_seq", sequenceName = "SEQ_GENRE_ID", allocationSize = 1)
     @Column(name = "GENRE_ID")
     private Integer idGenre;
 

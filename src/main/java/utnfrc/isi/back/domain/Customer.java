@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -78,6 +79,6 @@ public class Customer {
     private String email;
 
     @ManyToOne(optional = true)
-    @Column(name = "SUPPORT_REP_ID")
-    private Integer supportRepId;
+    @JoinColumn(name = "SUPPORT_REP_ID")
+    private Employee supportRep;  
 }

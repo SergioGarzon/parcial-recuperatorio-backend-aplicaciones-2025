@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -27,17 +28,17 @@ public class PlaylistTrack {
      */
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="playlisttrack_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "playlisttrack_seq")
     @SequenceGenerator(name = "playlisttrack_seq", sequenceName = "SEQ_PLAYLIST_TRACK_ID", allocationSize = 1)
     @Column(name = "PLAYLIST_TRACK_ID")
     private Integer idPlaylistTrack;
 
     @ManyToOne(optional = false)
-    @Column(name = "PLAYLIST_ID")
-    private Integer idPlaylist;
+    @JoinColumn(name = "PLAYLIST_ID", nullable = false)
+    private Playlist playlist; 
 
     @ManyToOne(optional = false)
-    @Column(name = "TRACK_ID")
-    private Integer idTrack;
+    @JoinColumn(name = "TRACK_ID", nullable = false)
+    private Track track;  
 
 }

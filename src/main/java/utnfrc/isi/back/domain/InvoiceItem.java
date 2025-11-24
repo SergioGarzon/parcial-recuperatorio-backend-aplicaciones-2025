@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -36,8 +37,8 @@ public class InvoiceItem {
     private Integer idInvoiceLine;
 
     @ManyToOne(optional = false)
-    @Column(name = "INVOICE_ID")
-    private Integer idInvoice;
+    @JoinColumn(name = "INVOICE_ID", nullable = false)
+    private Invoice idInvoice;
 
     @Column(name = "TRACK_ID")
     private Integer idTrack;
