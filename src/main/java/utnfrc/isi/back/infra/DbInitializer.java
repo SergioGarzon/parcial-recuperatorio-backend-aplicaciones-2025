@@ -18,6 +18,7 @@ public class DbInitializer {
     }
     
     public static void recreateSchemaFromDdl() {
+       
         try (Connection cn = DriverManager.getConnection(URL, USER, PASS)) {
             var in = DbInitializer.class.getResourceAsStream(DDL_CLASSPATH);
             if (in == null) {
@@ -30,11 +31,11 @@ public class DbInitializer {
             }
             // Validación rápida: asegurar que la secuencia existe
             try (var ps = cn.prepareStatement(
-                    "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_DESARROLLADORES'")) {
+                    "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_ARTIST_ID'")) {
                 try (var rs = ps.executeQuery()) {
                     rs.next();
                     if (rs.getInt(1) == 0) {
-                        throw new IllegalStateException("La secuencia SEQ_DESARROLLADORES no existe tras correr el DDL. " +
+                        throw new IllegalStateException("La secuencia SEQ_ARTIST_ID no existe tras correr el DDL. " +
                                 "Revisá el contenido del ddl.sql.");
                     }
                 }
@@ -42,7 +43,10 @@ public class DbInitializer {
         } catch (Exception e) {
             throw new RuntimeException("Error ejecutando DDL con RunScript", e);
         }
+        
     }
+
+    
 
     
 

@@ -1,6 +1,6 @@
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
     
-    <persistence-unit name="database" transaction-type="RESOURCE_LOCAL">        
+    <persistence-unit name="pu-backend" transaction-type="RESOURCE_LOCAL">        
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
     <class>utnfc.isi.back.domain.Album</class>

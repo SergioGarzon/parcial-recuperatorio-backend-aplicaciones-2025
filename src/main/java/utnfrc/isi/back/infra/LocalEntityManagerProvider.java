@@ -1,5 +1,29 @@
 package utnfrc.isi.back.infra;
 
-public class LocalEntityManagerProvider {
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
+public final class LocalEntityManagerProvider {
     
+    
+    private static final String PU = "pu-backend";
+    private static final EntityManagerFactory EMF;
+
+    static {
+        // recrea el esquema explícitamente desde el ddl.sql (como en los ejemplos JDBC/JPA)
+        DbInitializer.recreateSchemaFromDdl();
+        EMF = Persistence.createEntityManagerFactory(PU);
+    }
+
+    private LocalEntityManagerProvider(){}
+
+    public static EntityManager em() {
+        return EMF.createEntityManager();
+    }
+
+    public static void close() {
+        EMF.close();
+    }
+
 }
