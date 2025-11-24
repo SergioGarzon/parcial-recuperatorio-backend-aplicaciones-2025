@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class InvoiceItem {
     
     /*
@@ -19,10 +21,10 @@ public class InvoiceItem {
     QUANTITY        INTEGER        NOT NULL,
      */
 
-    private int idInvoiceLine;
-    private int idInvoice;
-    private int idTrack;
-    private float unitPrice;
-    private int quantity;
+    private Integer idInvoiceLine;
+    private Integer idInvoice;
+    private Integer idTrack;
+    private Float unitPrice;
+    private Integer quantity;
 
 }

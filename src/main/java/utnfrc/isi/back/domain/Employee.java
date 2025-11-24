@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Employee {
     /*    
     EMPLOYEE_ID  INTEGER       ,
@@ -28,11 +30,11 @@ public class Employee {
     EMAIL        VARCHAR(60),
     */
 
-    private int idEmployee;
+    private Integer idEmployee;
     private String lastName;
     private String firstName;
     private String title;
-    private int reportsTo;
+    private Integer reportsTo;
     private String birthDate;
     private String hireDate;
     private String address;

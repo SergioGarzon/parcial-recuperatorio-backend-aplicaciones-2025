@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Invoice {
     /*
     INVOICE_ID          INTEGER        NOT NULL DEFAULT NEXT VALUE FOR SEQ_INVOICE_ID,
@@ -22,13 +24,13 @@ public class Invoice {
     TOTAL               NUMERIC(10, 2) NOT NULL,
      */
 
-    private int idInvoice;
-    private int idCustomer;
+    private Integer idInvoice;
+    private Integer idCustomer;
     private String invoiceDate;
     private String billingAddress;
     private String billingCity;
     private String billingState;
     private String billingCountry;
     private String billingPostalCode;
-    private float total;
+    private Float total;
 }

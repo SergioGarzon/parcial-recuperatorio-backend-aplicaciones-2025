@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Track {
     
     /*
@@ -17,9 +19,9 @@ public class Track {
     TRACK_ID          INTEGER NOT NULL,
      */
 
-    private int idTrackPlaylist;
-    private int idPlaylist;
-    private int idTrack;
+    private Integer idTrackPlaylist;
+    private Integer idPlaylist;
+    private Integer idTrack;
 
     /* 
     public double getDurationInMinutes() {

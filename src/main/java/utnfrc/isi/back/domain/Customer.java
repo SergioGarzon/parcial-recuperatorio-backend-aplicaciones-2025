@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Getter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Customer {
     
     /*
@@ -28,7 +30,7 @@ public class Customer {
     SUPPORT_REP_ID INTEGER,
     */
 
-    private int customerId;
+    private Integer customerId;
     private String firstName;
     private String lastName;
     private String company;
@@ -40,5 +42,5 @@ public class Customer {
     private String phone;
     private String fax;
     private String email;
-    private int supportRepId;
+    private Integer supportRepId;
 }
