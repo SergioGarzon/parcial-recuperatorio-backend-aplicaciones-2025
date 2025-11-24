@@ -2,6 +2,10 @@ package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +26,9 @@ public class Track {
     TRACK_ID          INTEGER NOT NULL,
      */
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="trackplaylist_seq")
+    @SequenceGenerator(name = "trackplaylist_seq", sequenceName = "SEQ_PLAYLIST_TRACK_ID", allocationSize = 1)
     @Column(name = "PLAYLIST_TRACK_ID")
     private Integer idTrackPlaylist;
 

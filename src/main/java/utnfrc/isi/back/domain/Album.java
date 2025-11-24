@@ -2,8 +2,11 @@ package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +24,8 @@ public class Album {
     /*(ALBUM_ID, TITLE, ARTIST_ID */
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="album_seq")
+    @SequenceGenerator(name = "album_seq", sequenceName = "SEQ_ALBUM_ID", allocationSize = 1)
     @Column(name = "ALBUM_ID", nullable = false)
     private Integer idAlbum;
 

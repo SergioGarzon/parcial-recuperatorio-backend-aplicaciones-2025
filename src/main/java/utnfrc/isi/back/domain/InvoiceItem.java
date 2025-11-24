@@ -2,7 +2,11 @@ package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +29,9 @@ public class InvoiceItem {
     QUANTITY        INTEGER        NOT NULL,
      */
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="invoice_line_seq")
+    @SequenceGenerator(name = "invoice_line_seq", sequenceName = "SEQ_INVOICE_LINE_ID", allocationSize = 1)
     @Column(name = "INVOICE_LINE_ID")
     private Integer idInvoiceLine;
 

@@ -3,35 +3,38 @@
     <persistence-unit name="database" transaction-type="RESOURCE_LOCAL">        
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <!-- 
-    Aqui ir agregando las entidades
-    <class>domain.Album</class>
-    -->
+    <class>utnfc.isi.back.domain.Album</class>
+    <class>utnfc.isi.back.domain.Artist</class>
+    <class>utnfc.isi.back.domain.Customer</class>
+    <class>utnfc.isi.back.domain.Employee</class>
+    <class>utnfc.isi.back.domain.Genre</class>
+    <class>utnfc.isi.back.domain.Invoice</class>
+    <class>utnfc.isi.back.domain.InvoiceItem</class>
+    <class>utnfc.isi.back.domain.MediaType</class>
+    <class>utnfc.isi.back.domain.Playlist</class>
+    <class>utnfc.isi.back.domain.PlaylistTrack</class> 
+    <class>utnfc.isi.back.domain.Track</class>    
     
-
     <properties>
-        <!-- Para generar la base de datos con las tablas por medios del script.sql -->
-        <property name="jakarta.persistence.schema-generation.database.action" value="create" />
-        <property name="jakarta.persistence.schema-generation.create-source" value="script" />
-        <property name="jakarta.persistence.schema-generation.create-script-source" value="../sql/database-ddl.sql" />
-        <!-- CHECKEARLO DESPUES ************* -->
+      <!-- H2 en memoria -->
+      <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:backdb;DB_CLOSE_DELAY=-1;MODE=LEGACY"/>
+      <property name="jakarta.persistence.jdbc.user" value="sa"/>
+      <property name="jakarta.persistence.jdbc.password" value=""/>
 
-
-        <!-- JDBC (H2 en memoria) -->
-        <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:database;DB_CLOSE_DELAY=-1"/>
-        <property name="jakarta.persistence.jdbc.user" value="sa"/>
-        <property name="jakarta.persistence.jdbc.password" value=""/>
-
-        <!-- Dialecto específico -->
+      <!-- Dialecto específico -->
         <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
         <!-- DDL: para práctica inicial -->
         <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 
-        <!-- Log -->
-        <property name="hibernate.show_sql" value="true"/>
-        <property name="hibernate.format_sql" value="true"/>
+      <!-- Generación de esquema vía script (tu ddl.sql) -->
+      <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+
+      <!-- Log SQL (opcional) -->
+      <property name="hibernate.show_sql" value="false"/>
+      <property name="hibernate.format_sql" value="true"/>
     </properties>
+
     </persistence-unit>
 </persistence>

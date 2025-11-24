@@ -2,7 +2,10 @@ package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +39,8 @@ public class Employee {
     */
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="employee_seq")
+    @SequenceGenerator(name = "employee_seq", sequenceName = "SEQ_EMPLOYEE_ID", allocationSize = 1)
     @Column(name = "EMPLOYEE_ID")
     private Integer idEmployee;
 
