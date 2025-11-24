@@ -4,11 +4,17 @@
 
 <img src="./assets/Images/logo_utn_frc.png" alt="Imagen UTN FRC" />
 
-<br />
-
 * Carrera: Ingenieria en Sistemas de Información
 * Materia: BackEnd de Aplicaciones
 * Alumno: Garzón Sergio Gabriel
+
+## Repositorio de GitHub
+
+<img src="./assets/Images/github_logo.png" alt="Logotipo de GitHub" width="100" height="100" />
+
+~~~GITHUB
+  git clone https://github.com/SergioGarzon/parcial-recuperatorio-backend-aplicaciones-2025.git
+~~~
 
 ## Tecnologias:
 
