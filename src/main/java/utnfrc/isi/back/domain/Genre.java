@@ -1,6 +1,8 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +22,10 @@ public class Genre {
     NAME     VARCHAR(120),
      */
 
+    @Id
+    @Column(name = "GENRE_ID")
     private Integer idGenre;
+
+    @Column(name = "NAME")
     private String name;
 }

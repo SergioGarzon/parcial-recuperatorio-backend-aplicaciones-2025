@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -26,13 +27,30 @@ public class Invoice {
     TOTAL               NUMERIC(10, 2) NOT NULL,
      */
 
+    @Column(name = "INVOICE_ID")
     private Integer idInvoice;
+
+    @Column(name = "CUSTOMER_ID")
     private Integer idCustomer;
+
+    @Column(name = "INVOICE_DATE")
     private String invoiceDate;
+
+    @Column(name = "BILLING_ADDRESS")
     private String billingAddress;
+
+    @Column(name = "BILLING_CITY")
     private String billingCity;
+
+    @Column(name = "BILLING_STATE")
     private String billingState;
+
+    @Column(name = "BILLING_COUNTRY")
     private String billingCountry;
+
+    @Column(name = "BILLING_POSTAL_CODE")
     private String billingPostalCode;
+
+    @Column(name = "TOTAL")
     private Float total;
 }

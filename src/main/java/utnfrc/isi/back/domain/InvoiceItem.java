@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,19 @@ public class InvoiceItem {
     QUANTITY        INTEGER        NOT NULL,
      */
 
+    @Column(name = "INVOICE_LINE_ID")
     private Integer idInvoiceLine;
+
+    @Column(name = "INVOICE_ID")
     private Integer idInvoice;
+
+    @Column(name = "TRACK_ID")
     private Integer idTrack;
+
+    @Column(name = "UNIT_PRICE")
     private Float unitPrice;
+
+    @Column(name = "QUANTITY")
     private Integer quantity;
 
 }

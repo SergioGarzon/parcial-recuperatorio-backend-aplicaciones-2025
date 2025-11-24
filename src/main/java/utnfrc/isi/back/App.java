@@ -7,6 +7,11 @@ package utnfrc.isi.back;
  * @version 1.0
  */
 public class App {
+
+    /**
+     * Metodo principal de la aplicacion
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println("[OK] H2 + DDL inicializados y mapeos JPA verificados.");
     }

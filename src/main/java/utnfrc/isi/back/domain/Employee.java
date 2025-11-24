@@ -1,6 +1,8 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,19 +34,49 @@ public class Employee {
     EMAIL        VARCHAR(60),
     */
 
+    @Id
+    @Column(name = "EMPLOYEE_ID")
     private Integer idEmployee;
+
+    @Column(name = "LAST_NAME")
     private String lastName;
+
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Column(name = "TITLE")
     private String title;
+
+    @Column(name = "REPORTS_TO")
     private Integer reportsTo;
+
+    @Column(name = "BIRTH_DATE")
     private String birthDate;
+
+    @Column(name = "HIRE_DATE")
     private String hireDate;
+
+    @Column(name = "ADDRESS")
     private String address;
+
+    @Column(name = "CITY")
     private String city;
+
+    @Column(name = "STATE")
     private String state;
+
+    @Column(name = "COUNTRY")
     private String country;
+
+    @Column(name = "POSTAL_CODE")
     private String postalCode;
+
+    @Column(name = "PHONE")
     private String phone;
+
+    @Column(name = "FAX")
     private String fax;
+
+    @Column(name = "EMAIL")
     private String email;
 }

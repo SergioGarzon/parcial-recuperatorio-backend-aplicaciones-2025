@@ -1,5 +1,6 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,13 @@ public class PlaylistTrack {
     TRACK_ID          INTEGER NOT NULL,
      */
     
+    @Column(name = "PLAYLIST_TRACK_ID")
     private Integer idPlaylistTrack;
+
+    @Column(name = "PLAYLIST_ID")
     private Integer idPlaylist;
+
+    @Column(name = "TRACK_ID")
     private Integer idTrack;
 
 }

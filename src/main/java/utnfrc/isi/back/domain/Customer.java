@@ -1,6 +1,8 @@
 package utnfrc.isi.back.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -32,17 +34,43 @@ public class Customer {
     SUPPORT_REP_ID INTEGER,
     */
 
+    @Id
+    @Column(name = "CUSTOMER_ID")
     private Integer customerId;
+
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Column(name = "LAST_NAME")
     private String lastName;
+
+    @Column(name = "COMPANY")
     private String company;
+
+    @Column(name = "ADDRESS")
     private String address;
+
+    @Column(name = "CITY")
     private String city;
+
+    @Column(name = "STATE")
     private String state;
+
+    @Column(name = "COUNTRY")
     private String country;
+
+    @Column(name = "POSTAL_CODE")
     private String postalCode;
+
+    @Column(name = "PHONE")
     private String phone;
+
+    @Column(name = "FAX")
     private String fax;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "SUPPORT_REP_ID")
     private Integer supportRepId;
 }
