@@ -2,6 +2,7 @@ package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class InvoiceItem {
     @Column(name = "INVOICE_LINE_ID")
     private Integer idInvoiceLine;
 
+    @ManyToOne(optional = false)
     @Column(name = "INVOICE_ID")
     private Integer idInvoice;
 

@@ -2,6 +2,7 @@ package utnfrc.isi.back.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,9 +25,11 @@ public class PlaylistTrack {
     @Column(name = "PLAYLIST_TRACK_ID")
     private Integer idPlaylistTrack;
 
+    @ManyToOne(optional = false)
     @Column(name = "PLAYLIST_ID")
     private Integer idPlaylist;
 
+    @ManyToOne(optional = false)
     @Column(name = "TRACK_ID")
     private Integer idTrack;
 

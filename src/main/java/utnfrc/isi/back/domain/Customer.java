@@ -3,6 +3,7 @@ package utnfrc.isi.back.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -71,6 +72,7 @@ public class Customer {
     @Column(name = "EMAIL")
     private String email;
 
+    @ManyToOne(optional = true)
     @Column(name = "SUPPORT_REP_ID")
     private Integer supportRepId;
 }
