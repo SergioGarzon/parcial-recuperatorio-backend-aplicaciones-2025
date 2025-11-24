@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,12 +22,17 @@ import lombok.Setter;
 @Table(name = "TRACKS")
 public class Track {
     
-    /*
-     PLAYLIST_TRACK_ID INTEGER NOT NULL DEFAULT NEXT VALUE FOR SEQ_PLAYLIST_TRACK_ID,
-    PLAYLIST_ID       INTEGER NOT NULL,
-    TRACK_ID          INTEGER NOT NULL,
-     */
-
+    /*    
+    TRACK_ID      INTEGER        NOT NULL DEFAULT NEXT VALUE FOR SEQ_TRACK_ID,
+    NAME          VARCHAR(200)   NOT NULL,
+    ALBUM_ID      INTEGER,
+    MEDIA_TYPE_ID INTEGER        NOT NULL,
+    GENRE_ID      INTEGER,
+    COMPOSER      VARCHAR(220),
+    MILLISECONDS  INTEGER        NOT NULL,
+    BYTES         INTEGER,
+    UNIT_PRICE    NUMERIC(10, 2) NOT NULL,
+    */ 
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "track_seq")
@@ -33,13 +40,14 @@ public class Track {
     @Column(name = "TRACK_ID")
     private Integer idTrack;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "ALBUM_ID")
-    private Integer albumId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ALBUM_ID")
+    private Album album;  
 
-    @Column(name = "MEDIA_TYPE_ID")
+    @Column(name = "MEDIA_TYPE_ID", nullable = false)
     private Integer mediaTypeId;
 
     @Column(name = "GENRE_ID")
@@ -48,16 +56,15 @@ public class Track {
     @Column(name = "COMPOSER")
     private String composer;
 
-    @Column(name = "MILLISECONDS")
+    @Column(name = "MILLISECONDS", nullable = false)
     private Integer milliseconds;
 
     @Column(name = "BYTES")
     private Integer bytes;
 
-    @Column(name = "UNIT_PRICE")
+    @Column(name = "UNIT_PRICE", nullable = false)
     private Float unitPrice;
-  
-    
+
     public double getDurationInMinutes() {
         return milliseconds != null ? milliseconds / 60000.0 : 0.0;
     }
