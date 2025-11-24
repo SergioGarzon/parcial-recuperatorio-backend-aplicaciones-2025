@@ -38,6 +38,12 @@
 
 ## Pasos para la ejecución del proyecto
 
+* En el sistema operativo (Windows, Linux, Mac OS), ejecutar el comando para abrir el VSCode
+
+  ~~~WINDOWS
+  code
+  ~~~
+
 * Abrir terminal de VSCode (Ctrl+Shift-ñ)
 * Ejecutar comando: 
   
