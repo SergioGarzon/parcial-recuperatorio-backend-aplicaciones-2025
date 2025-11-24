@@ -36,7 +36,7 @@
 
 * Motor de base de datos embebido H2
 
-## Pasos para la ejecución del proyecto
+## Pasos para la ejecución del proyecto con Maven
 
 * En el sistema operativo (Windows, Linux, Mac OS), ejecutar el comando para abrir el VSCode
 
@@ -50,6 +50,32 @@
   ~~~MAVEN
   mvn clean compile exec:java
   ~~~
+
+* Nos va salir la url para entrar a la base de datos H2 en el navegador
+
+  ~~~H2
+  http://localhost:8082
+  ~~~
+
+* Ponemos las credenciales en el navegador
+
+  - __JDBC URL:__ jdbc:h2:mem:backdb
+  - __User Name:__ sa
+  - __Password:__ (No poner nada)
+
+  Despues de esto presionar el botón conectar
+
+  <br />
+
+  <img src="./assets/Images/motoh2login.png" alt="Imagen del login del motor H2" />
+
+  <br />
+
+  <img src="./assets/Images/motorejecutandose.png" alt="Motor en ejecución" />
+  
+
+
+## Pasos para la ejecución del proyecto con Java
 
 * Generación del archivo .jar con el comando:
   
