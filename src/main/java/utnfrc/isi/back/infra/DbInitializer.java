@@ -3,7 +3,6 @@ package utnfrc.isi.back.infra;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
-import javax.sql.DataSource;
 import org.h2.tools.RunScript;
 
 public class DbInitializer {

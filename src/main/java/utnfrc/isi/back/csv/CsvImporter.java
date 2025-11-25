@@ -21,7 +21,7 @@ public class CsvImporter {
 
             em.getTransaction().commit();
 
-            System.out.println("Artistas importados correctamente.");
+            System.out.println("\n\n[OK] Artistas importados correctamente.");
             
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {

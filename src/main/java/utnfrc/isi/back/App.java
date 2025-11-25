@@ -126,7 +126,7 @@ public class App {
                     em.close();
                     LocalEntityManagerProvider.close();
                     System.out.println("\nHasta luego");
-                    return;                              
+                    return;                           
                 default: 
                     System.out.println("\nOpcion incorrecta! \n\n");
                     break;
@@ -181,8 +181,15 @@ public class App {
             Artist artist = new Artist();
 
             String nombre = "";
-            System.out.print("Ingrese el nombre del artista a cargar: ");
-            nombre = entrada.readLine();
+
+            do {
+                System.out.print("\n\nIngrese el nombre del artista a cargar: ");
+                nombre = entrada.readLine();
+
+                if(nombre.equals(""))
+                    System.out.println("ERROR: No se ingresado el nombre!");
+            } while(nombre.equals(""));
+            
             artist.setName(nombre);
             App.ar.save(artist);
             System.out.println("\n[OK] Artista " + nombre + " guardado correctamente.");
@@ -225,8 +232,7 @@ public class App {
             album.setTitle(nombre);            
 
             do {
-                System.out.print("Ingrese el número de artista a quien le corresponde el album: ");
-                numeroArtista = Integer.parseInt(entrada.readLine());
+                numeroArtista = validarEntero("Ingrese el número de artista a quien le corresponde el album: ");
 
                 for (Artist a : artists) {
                     if(a.getIdArtist() == numeroArtista) {
@@ -298,14 +304,18 @@ public class App {
             
             Track track = new Track();
         
-            System.out.print("\nIngrese el nombre del track: ");
-            nombreTrack = entrada.readLine();
+            do {
+                System.out.print("\nIngrese el nombre del track: ");
+                nombreTrack = entrada.readLine();
 
+                if(nombreTrack.equals(""))
+                    System.out.println("ERROR: No ha ingresado el nombre del track!");
+            } while(nombreTrack.equals(""));
+            
             track.setName(nombreTrack);
 
             do {
-                System.out.print("Ingrese el código del album: ");
-                codigoAlbum = Integer.parseInt(entrada.readLine());
+                codigoAlbum = validarEntero("Ingrese el código del album: ");
 
                 for (Album al : albumData) {
                     if(al.getIdAlbum() == codigoAlbum) {
@@ -319,8 +329,7 @@ public class App {
             } while(!cAlbum);
 
             do {
-                System.out.print("Ingrese el código del MediaType: ");
-                codigoMediaType = Integer.parseInt(entrada.readLine());
+                codigoMediaType = validarEntero("Ingrese el código del MediaType: ");
 
                 for (MediaType mt : mediaTypeList) {
                     if(mt.getIdMediaType() == codigoMediaType) {
@@ -334,8 +343,7 @@ public class App {
             } while(!cMediaType);
 
             do {
-                System.out.print("Ingrese el código del Genre: ");
-                codigoGenre = Integer.parseInt(entrada.readLine());
+                codigoGenre = validarEntero("Ingrese el código del Genre: ");
 
                 for (Genre gnr : genreList) {
                     if(gnr.getIdGenre() == codigoGenre) {
@@ -348,27 +356,28 @@ public class App {
                     System.out.println("Código de Genre incorrecto!");
             } while(!cGenre);
 
-            System.out.print("Ingrese el nombre del compositor: ");
-            composerName = entrada.readLine();
+            do {    
+                System.out.print("Ingrese el nombre de él/la compositor/a: ");
+                composerName = entrada.readLine();
 
+                if(composerName.equals(""))
+                    System.out.println("ERROR: No ha ingresado el nombre del compositor/a!");
+            } while(composerName.equals(""));
+            
             track.setComposer(composerName);
 
-            System.out.print("Ingrese la duración en milisegundos: ");
-            durationTrack = Integer.parseInt(entrada.readLine());
-            
+            durationTrack = validarEntero("Ingrese la duración en milisegundos: ");            
             track.setMilliseconds(durationTrack);
 
-            System.out.print("Ingrese los bytes: ");
-            byteTrack = Integer.parseInt(entrada.readLine());
-
+            byteTrack = validarEntero("Ingrese los bytes: ");
             track.setBytes(byteTrack);
 
-            System.out.print("Ingrese unit price: ");
-            unitPrice = Float.parseFloat(entrada.readLine());
-
+            unitPrice = validarFlotante("Ingrese unit price: ");
             track.setUnitPrice(unitPrice);
 
-            App.tRepo.save(track);            
+            App.tRepo.save(track);      
+            
+            System.out.println("\n\n[OK] Track cargado correctamente!");
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
@@ -410,14 +419,46 @@ public class App {
         }
     }
 
-    private static void cargarCSVArtist() {
-       
+    private static void cargarCSVArtist() {       
         try {
             CsvImporter.importArtists(em, System.getProperty("user.dir") + "\\src\\main\\resources\\files\\artists.csv");            
         } catch (Exception e) {
             System.err.println("Error en la aplicación: " + e.getMessage());
             e.printStackTrace();
-        } 
-       
+        }        
+    }
+
+    private static int validarEntero(String texto) throws IOException {
+
+        int valor = -1;
+
+        do {
+            try {
+                System.out.print(texto);
+                valor = Integer.parseInt(entrada.readLine());
+            } catch(NumberFormatException e) {
+                System.err.println("ERROR: El valor ingresado no es númerico");
+                valor = -1;
+            }                            
+        } while(valor == -1);
+
+        return valor;
+    }
+
+    private static float validarFlotante(String texto) throws IOException {
+
+        float valor = -1;
+
+        do {
+            try {
+                System.out.print(texto);
+                valor = Float.parseFloat(entrada.readLine());
+            } catch(NumberFormatException e) {
+                System.err.println("ERROR: El valor ingresado no es númerico");
+                valor = -1;
+            }                            
+        } while(valor == -1);
+
+        return valor;
     }
 }
