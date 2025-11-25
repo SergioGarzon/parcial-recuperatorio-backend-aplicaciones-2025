@@ -45,13 +45,20 @@
   ~~~
 
 * Abrir terminal de VSCode (Ctrl+Shift-ñ)
+  
 * Ejecutar comando: 
   
   ~~~MAVEN
   mvn clean compile exec:java
   ~~~
 
-* Nos va salir la url para entrar a la base de datos H2 en el navegador
+* Nos va a salir el Menú de Opciones, debemos elegir como primer instancia la opción 1 (uno)
+
+<img src="./assets/Images/menuopciones.png" alt="Menu de opciones" />
+
+<br />
+
+* Despues elegimos la opción 2 (dos) y nos va salir la url para entrar a la base de datos H2 en el navegador
 
   ~~~H2
   http://localhost:8082
@@ -71,10 +78,24 @@
 
   <br />
 
-  <img src="./assets/Images/motorejecutandose.png" alt="Motor en ejecución" />
+  <img src="./assets/Images/motorejecutandose.png" alt="Motor en ejecución" width="600" height="350" />
+
+  <br />
+
+  * En el motor H2 que esta abierto en el navegador, podremos escribir consultas para saber si los datos se han insertado correctamente
   
+  <br />
+  
+  <img src="./assets/Images/motorh2consulta.png" alt="Motor h2 consulta" />
 
+  <br />
 
+  * Con esto podremos continuar con el Menu de Opciones en la terminal de VSCode, ir probando distintas opciones
+
+  <img src="./assets/Images/menuopciones.png" alt="Menu de opciones" />
+
+  <br />
+  
 ## Pasos para la ejecución del proyecto con Java
 
 * Generación del archivo .jar con el comando:

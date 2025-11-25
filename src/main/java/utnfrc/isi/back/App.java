@@ -134,6 +134,7 @@ public class App {
             
         } while(opcion != 9);
 
+        System.exit(0); // No es buena practica pero si no llega a finalizar, esto mato todo
     }
 
     private static void mostrarBD() {
