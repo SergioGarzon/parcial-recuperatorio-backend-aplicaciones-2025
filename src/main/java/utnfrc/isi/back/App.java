@@ -33,6 +33,7 @@ public class App {
     private static TrackRepository tRepo;
     private static InvoiceRepository invRepo;
     private static BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+    private static boolean validador;
 
     private App() {
         App.em = LocalEntityManagerProvider.em();
@@ -40,6 +41,8 @@ public class App {
         App.albRepo = new AlbumRepository(App.em);
         App.tRepo = new TrackRepository(App.em);
         App.invRepo = new InvoiceRepository(App.em);
+
+        App.validador = false;
     }
 
     /**
@@ -134,9 +137,16 @@ public class App {
     }
 
     private static void mostrarBD() {
-        try {
-            org.h2.tools.Server.createWebServer("-webPort", "8082", "-webAllowOthers").start();
-            System.out.println("""
+        if(!App.validador) 
+            try { 
+                org.h2.tools.Server.createWebServer("-webPort", "8082", "-webAllowOthers").start();
+                App.validador = true;
+            } catch (Exception e) {
+                System.err.println("\nNo se pudo iniciar el servidor web de H2: " + e.getMessage());
+                e.printStackTrace();
+            }
+
+        System.out.println("""
                 \nConsola de H2 disponible en: http://localhost:8082
                 Recorda las credenciales para acceder a la base de datos \n
                 Controlador: org.h2.Driver
@@ -144,10 +154,6 @@ public class App {
                 Nombre de usuario: sa
                 Contraseña: (Ninguna)
                 \n""");
-        } catch (Exception e) {
-            System.err.println("\nNo se pudo iniciar el servidor web de H2: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
     private static void verificarCantRegistrosArtistas() {
@@ -407,7 +413,7 @@ public class App {
     private static void cargarCSVArtist() {
        
         try {
-            CsvImporter.importArtists(em, "C:\\Users\\asus tuf\\Desktop\\Proyectos de BackEnd 2025\\recuperatorio-parcial-3k1-Garzon-Sergio-54330\\src\\main\\resources\\files\\artists.csv");            
+            CsvImporter.importArtists(em, System.getProperty("user.dir") + "\\src\\main\\resources\\files\\artists.csv");            
         } catch (Exception e) {
             System.err.println("Error en la aplicación: " + e.getMessage());
             e.printStackTrace();
