@@ -3,8 +3,13 @@ package utnfrc.isi.back;
 import utnfrc.isi.back.domain.Artist;
 import utnfrc.isi.back.domain.Genre;
 import utnfrc.isi.back.domain.MediaType;
+import utnfrc.isi.back.csv.CsvImporter;
 import utnfrc.isi.back.domain.Album;
 import utnfrc.isi.back.domain.Track;
+import utnfrc.isi.back.repo.ArtistRepository;
+import utnfrc.isi.back.repo.AlbumRepository;
+import utnfrc.isi.back.repo.InvoiceRepository;
+import utnfrc.isi.back.repo.TrackRepository;
 import utnfrc.isi.back.infra.LocalEntityManagerProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -23,10 +28,18 @@ import java.util.List;
 public class App {
 
     private static EntityManager em;
+    private static ArtistRepository ar;
+    private static AlbumRepository albRepo;
+    private static TrackRepository tRepo;
+    private static InvoiceRepository invRepo;
     private static BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
 
     private App() {
         App.em = LocalEntityManagerProvider.em();
+        App.ar = new ArtistRepository(App.em);
+        App.albRepo = new AlbumRepository(App.em);
+        App.tRepo = new TrackRepository(App.em);
+        App.invRepo = new InvoiceRepository(App.em);
     }
 
     /**
@@ -41,15 +54,18 @@ public class App {
         boolean control = false;
 
         do {
-            System.out.println("\n*****************MENU DE OPCIONES*****************");
-            System.out.println("1) Cargar la base de datos en memoria");
-            System.out.println("2) Verificar la base de datos en el navegador");
-            System.out.println("3) Verificar cantidad de registros en Artists");
-            System.out.println("4) Verificar cantidad de registros en Genres");
-            System.out.println("5) Cargar datos de pruebas de Artists");
-            System.out.println("6) Cargar datos de pruebas de Album");
-            System.out.println("7) Cargar datos de pruebas de Track");
-            System.out.println("9) Salir del sistema");
+            System.out.println(""" 
+                \n *****************MENU DE OPCIONES*****************
+                    1) Cargar la base de datos en memoria
+                    2) Verificar la base de datos en el navegador
+                    3) Verificar cantidad de registros en Artists
+                    4) Verificar cantidad de registros en Genres
+                    5) Cargar datos de pruebas de Artists
+                    6) Cargar datos de pruebas de Album
+                    7) Cargar datos de pruebas de Track
+                    8) Cargar datos de artistas desde un archivo .csv
+                    9) Salir del sistema
+                """);
             System.out.print("\nIngrese la opción: ");
             opcion = Integer.parseInt(entrada.readLine());
 
@@ -97,7 +113,14 @@ public class App {
                     else 
                         System.out.println("\nSe debe crear primero la base de datos, poner opción 1");
                     break;
+                case 8:
+                    if(control) 
+                       cargarCSVArtist();                     
+                    else 
+                        System.out.println("\nSe debe crear primero la base de datos, poner opción 1");
+                    break;
                 case 9:
+                    em.close();
                     LocalEntityManagerProvider.close();
                     System.out.println("\nHasta luego");
                     return;                              
@@ -154,11 +177,8 @@ public class App {
             String nombre = "";
             System.out.print("Ingrese el nombre del artista a cargar: ");
             nombre = entrada.readLine();
-
             artist.setName(nombre);
-            em.getTransaction().begin();
-            em.persist(artist);
-            em.getTransaction().commit();
+            App.ar.save(artist);
             System.out.println("\n[OK] Artista " + nombre + " guardado correctamente.");
             System.out.println("\nRecorda que podes consultar en la base de datos");            
 
@@ -170,6 +190,11 @@ public class App {
     
     private static void cargarAlbum() {
         try {
+
+            boolean cArtista = false;
+            String nombre = "", nombreArtista = "";
+            int numeroArtista = 0;
+
             System.out.println("\nPara cargar datos de los Albums, primero debemos conocer los datos de los artistas");
 
             Query query = em.createQuery("SELECT a FROM Artist a", Artist.class);
@@ -181,29 +206,37 @@ public class App {
                 System.out.println("ID: " + a.getIdArtist() + ", Nombre: " + a.getName());
             }           
 
-            Album artist = new Album();
-
-            String nombre = "", nombreArtista = "";
-            int numeroArtista = 0;
-
-            System.out.print("\n\nIngrese el nombre del album a cargar: ");
-            nombre = entrada.readLine();
-
-            System.out.print("Ingrese el número de artista a quien le corresponde el album: ");
-            numeroArtista = Integer.parseInt(entrada.readLine());
-
-            artist.setTitle(nombre);
-
-            for (Artist a : artists) {
-                if(a.getIdArtist() == numeroArtista) {
-                    nombreArtista = a.getName();
-                    artist.setIdArtist(a);
-                }                    
-            } 
+            Album album = new Album();
             
-            em.getTransaction().begin();
-            em.persist(artist);
-            em.getTransaction().commit();
+            do {
+                System.out.print("\n\nIngrese el nombre del album a cargar: ");
+                nombre = entrada.readLine();
+
+                if(nombre.equals(""))
+                    System.out.println("\nERROR: No ha ingresado el nombre del artista!");
+            } while(nombre.equals(""));
+
+            album.setTitle(nombre);            
+
+            do {
+                System.out.print("Ingrese el número de artista a quien le corresponde el album: ");
+                numeroArtista = Integer.parseInt(entrada.readLine());
+
+                for (Artist a : artists) {
+                    if(a.getIdArtist() == numeroArtista) {
+                        nombreArtista = a.getName();
+                        album.setIdArtist(a);
+                        cArtista = true;
+                    }                    
+                } 
+
+                if(!cArtista)
+                    System.out.println("Código del artista incorrecto!");
+            } while(!cArtista);
+
+            
+            App.albRepo.save(album);
+
             System.out.println("\n[OK] Album " + nombre + " de artista " + nombreArtista + " guardado correctamente.");
             System.out.println("\nRecorda que podes consultar en la base de datos");
 
@@ -214,6 +247,12 @@ public class App {
     }    
 
     private static void cargarTrack() throws IOException {
+
+        boolean cAlbum = false, cMediaType = false, cGenre = false;
+        String nombreTrack = "", composerName = "";
+        int codigoAlbum = 0, codigoMediaType = 0, codigoGenre = 0, durationTrack = 0, byteTrack = 0;
+        float unitPrice = 0f; 
+
         try {
             System.out.println("\nPara cargar datos de los Track, primero se deben cargar por defecto algunos Genres y MusicTypes");
 
@@ -252,10 +291,6 @@ public class App {
             }  
             
             Track track = new Track();
-
-            String nombreTrack = "", composerName = "";
-            int codigoAlbum = 0, codigoMediaType = 0, codigoGenre = 0, durationTrack = 0, byteTrack = 0;
-            float unitPrice = 0f;
         
             System.out.print("\nIngrese el nombre del track: ");
             nombreTrack = entrada.readLine();
@@ -267,45 +302,45 @@ public class App {
                 codigoAlbum = Integer.parseInt(entrada.readLine());
 
                 for (Album al : albumData) {
-                    if(al.getIdAlbum() == codigoAlbum)
+                    if(al.getIdAlbum() == codigoAlbum) {
                         track.setAlbum(al);
-                    else 
-                        codigoAlbum = 0;                  
+                        cAlbum = true; 
+                    }                                        
                 } 
 
-                if(codigoAlbum == 0)
+                if(!cAlbum)
                     System.out.println("Código de album incorrecto!");
-            } while(codigoAlbum == 0);
+            } while(!cAlbum);
 
             do {
                 System.out.print("Ingrese el código del MediaType: ");
                 codigoMediaType = Integer.parseInt(entrada.readLine());
 
                 for (MediaType mt : mediaTypeList) {
-                    if(mt.getIdMediaType() == codigoMediaType)
-                        track.setMediaTypeId(mt);
-                    else 
-                        codigoMediaType = 0;                  
+                    if(mt.getIdMediaType() == codigoMediaType) {
+                        track.setMediaTypeId(mt);    
+                        cMediaType = true;
+                    }                                     
                 } 
 
-                if(codigoMediaType == 0)
+                if(!cMediaType)
                     System.out.println("Código de MediaType incorrecto!");
-            } while(codigoMediaType == 0);
+            } while(!cMediaType);
 
             do {
                 System.out.print("Ingrese el código del Genre: ");
                 codigoGenre = Integer.parseInt(entrada.readLine());
 
                 for (Genre gnr : genreList) {
-                    if(gnr.getIdGenre() == codigoGenre)
-                        track.setGenreId(gnr);
-                    else 
-                        codigoGenre = 0;                  
+                    if(gnr.getIdGenre() == codigoGenre) {
+                        track.setGenreId(gnr); 
+                        cGenre = true;
+                    }                                      
                 } 
 
-                if(codigoGenre == 0)
+                if(!cGenre)
                     System.out.println("Código de Genre incorrecto!");
-            } while(codigoGenre == 0);
+            } while(!cGenre);
 
             System.out.print("Ingrese el nombre del compositor: ");
             composerName = entrada.readLine();
@@ -327,23 +362,26 @@ public class App {
 
             track.setUnitPrice(unitPrice);
 
-            em.getTransaction().begin();
-            em.persist(track);
-            em.getTransaction().commit();
-
-            
+            App.tRepo.save(track);            
         } catch(Exception e) {
             e.printStackTrace();
+        } finally {
+            cAlbum = false;
         }
     }
 
     private static void cargaGenres() {
         try {
-            Genre genre = new Genre();
-            genre.setName("Folklore");        
-            em.getTransaction().begin();
-            em.persist(genre);
-            em.getTransaction().commit();
+            String[] genresMusicians = new String[] {"Folklore", "Rock", "Jazz", "Tango", "Pop"};
+
+            for(int i = 0; i < genresMusicians.length; i++) {
+                Genre genre = new Genre();
+                genre.setName(genresMusicians[i]);
+                em.getTransaction().begin();
+                em.persist(genre);
+                em.getTransaction().commit();
+            }                   
+            
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -351,13 +389,29 @@ public class App {
 
     private static void cargaMediaType() {
         try {
-            MediaType mediaType = new MediaType();
-            mediaType.setName("Media type 1");   
-            em.getTransaction().begin();
-            em.persist(mediaType);
-            em.getTransaction().commit();
+
+            String[] mediaTypeVector = new String[] {"MP3", "WAV", "OGG", "AAC", "FLAC"};
+
+            for(int i = 0; i < mediaTypeVector.length; i++) {
+                MediaType mediaType = new MediaType();
+                mediaType.setName(mediaTypeVector[i]);
+                em.getTransaction().begin();
+                em.persist(mediaType);
+                em.getTransaction().commit();
+            }  
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void cargarCSVArtist() {
+       
+        try {
+            CsvImporter.importArtists(em, "C:\\Users\\asus tuf\\Desktop\\Proyectos de BackEnd 2025\\recuperatorio-parcial-3k1-Garzon-Sergio-54330\\src\\main\\resources\\files\\artists.csv");            
+        } catch (Exception e) {
+            System.err.println("Error en la aplicación: " + e.getMessage());
+            e.printStackTrace();
+        } 
+       
     }
 }
